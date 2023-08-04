@@ -1,15 +1,13 @@
-import logo from './assets/investment-calculator-logo.png';
+
 import Header from "./components/Header/Header";
 import UserInput from "./components/UserInput/UserInput";
 import ResultsTable from "./components/ResultsTable/ResultsTable";
-import userInput from "./components/UserInput/UserInput";
 import {useState} from "react";
 
 function App() {
 
   const [userInput,setUserInput] = useState(null);
   const calculateHandler = (userInput) => {
-
     setUserInput(userInput);
 
   };
@@ -39,14 +37,11 @@ function App() {
 
   return (
       <div>
-        <Header></Header>
+        <Header />
 
-        <UserInput onCalculate={calculateHandler(userInput)}></UserInput>
-
-        {/* Todo: Show below table conditionally (only once result data is available) */}
-        {/* Show fallback text if no data is available */}
-
-        <ResultsTable></ResultsTable>
+        <UserInput onCalculate={calculateHandler}></UserInput>
+        {!userInput && <p>No investment calculated yet.</p>}
+        {userInput && <ResultsTable data={yearlyData} initialInvestment={userInput['current-savings']}></ResultsTable>}
       </div>
   );
 }
